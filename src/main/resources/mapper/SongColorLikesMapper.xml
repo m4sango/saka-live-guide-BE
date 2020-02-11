@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m4sango.sakaliveguide.infrastructure.repository.mapper.SongColorLikesMapper">
+  <sql id="selectBase">
+    SELECT
+      SONG_COLOR_ID,
+      USER_ID
+  </sql>
+  
+  <sql id="countBase">
+    SELECT
+      COUNT(*)
+  </sql>
+  
+  <sql id="from">
+    FROM
+      SONG_COLOR_LIKES
+  </sql>
+
+  <select id="countBySongColorId" resultType="int">
+    <include refid="countBase"/>
+    <include refid="from"/>
+    WHERE
+      SONG_COLOR_ID = #{songColorId}
+  </select>
+</mapper>
