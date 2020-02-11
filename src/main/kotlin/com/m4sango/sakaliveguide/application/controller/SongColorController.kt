@@ -1,28 +1,42 @@
 package com.m4sango.sakaliveguide.application.controller
 
-import com.m4sango.sakaliveguide.application.resource.response.SongColorGetLikesResponse
-import com.m4sango.sakaliveguide.application.resource.response.SongColorGetListResponse
+import com.m4sango.sakaliveguide.application.resource.request.SongColorsRegisterRequest
+import com.m4sango.sakaliveguide.application.resource.response.SongColorsGetLikesResponse
+import com.m4sango.sakaliveguide.application.resource.response.SongColorsGetListResponse
+import com.m4sango.sakaliveguide.domain.SongColor
 import com.m4sango.sakaliveguide.domain.service.SongColorService
 import com.m4sango.sakaliveguide.domain.value.SongColorId
+import com.m4sango.sakaliveguide.domain.value.SongName
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/song/color", produces = [MediaType.APPLICATION_JSON_VALUE])
+@RequestMapping("/song/colors", produces = [MediaType.APPLICATION_JSON_VALUE])
 class SongColorController(private val songColorService: SongColorService) {
 
-    @GetMapping("/list")
-    fun getList(): SongColorGetListResponse {
-        return SongColorGetListResponse.create(songColorService.getSongColorList())
+    @GetMapping
+    fun getList(
+            @RequestParam("songName") songName: String
+    ): SongColorsGetListResponse {
+        return SongColorsGetListResponse.create(songColorService.getSongColorList(SongName(songName)))
     }
 
     @GetMapping("/{songColorId}/likes")
     fun getLikes(
             @PathVariable("songColorId") songColorId: Int
-    ): SongColorGetLikesResponse {
-        return SongColorGetLikesResponse.create(songColorService.getLikes(SongColorId(songColorId)))
+    ): SongColorsGetLikesResponse {
+        return SongColorsGetLikesResponse.create(songColorService.getLikes(SongColorId(songColorId)))
+    }
+
+    @PostMapping
+    fun register(
+            @RequestBody request: SongColorsRegisterRequest
+    ): ResponseEntity<Any> {
+
+        songColorService.register(SongColor.createForRegister(request))
+
+        return ResponseEntity(HttpStatus.CREATED)
     }
 }

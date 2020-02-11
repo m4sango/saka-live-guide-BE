@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.m4sango.sakaliveguide.infrastructure.repository.mapper.SongColorListMapper">
+  <sql id="selectBase">
+    SELECT
+      SONG_COLOR_ID,
+      USER_ID,
+      SONG_NAME,
+      PEN_COLOR_1,
+      PEN_COLOR_2
+  </sql>
+  
+  <sql id="count">
+    SELECT COUNT(*)
+  </sql>
+  
+  <sql id="from">
+    FROM
+      SONG_COLOR_LIST
+  </sql>
+  
+  <sql id="whereSongName">
+    SONG_NAME = #{songName}
+  </sql>
+  <sql id="wherePenColor1">
+    PEN_COLOR_1 = #{penColor1}
+  </sql>
+  <sql id="wherePenColor2">
+    PEN_COLOR_2 = #{penColor2}
+  </sql>
+  
+  <select id="findBySongName" resultType="com.m4sango.sakaliveguide.infrastructure.repository.entity.SongColorEntity">
+    <include refid="selectBase"/>
+    <include refid="from"/>
+    WHERE
+    <include refid="whereSongName"/>
+  </select>
+  
+  <select id="countSame" resultType="int">
+    <include refid="count"/>
+    <include refid="from"/>
+    WHERE
+    <include refid="whereSongName"/>
+    AND
+    <include refid="wherePenColor1"/>
+    AND
+    <include refid="wherePenColor2"/>
+  </select>
+  
+  <insert id="insert" parameterType="com.m4sango.sakaliveguide.infrastructure.repository.entity.SongColorEntity">
+    INSERT INTO SONG_COLOR_LIST
+    (
+      USER_ID,
+      SONG_NAME,
+      PEN_COLOR_1,
+      PEN_COLOR_2
+    )
+    VALUES
+    (
+      #{userId},
+      #{songName},
+      #{penColor1},
+      #{penColor2}
+    )
+  </insert>
+</mapper>

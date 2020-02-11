@@ -17,4 +17,11 @@ enum class PenColor(val value: String) {
     BLACK("black"),
     // なし・決まっていない
     NONE("none"),
+    ;
+
+    companion object {
+        fun of(value: String): PenColor {
+            return values().firstOrNull { it.value == value } ?: NONE
+        }
+    }
 }
