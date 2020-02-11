@@ -13,4 +13,8 @@ enum class PenColor(val value: String) {
     LIGHT_BLUE("light_blue"),
     YELLOW_GREEN("yellow_green"),
     TURQUOISE("turquoise"),
+    // 公式には存在しない(かなりんのみ)
+    BLACK("black"),
+    // なし・決まっていない
+    NONE("none"),
 }
