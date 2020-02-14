@@ -8,6 +8,8 @@ import com.m4sango.sakaliveguide.domain.repository.SongColorRepository
 import com.m4sango.sakaliveguide.domain.value.Likes
 import com.m4sango.sakaliveguide.domain.value.SongColorId
 import com.m4sango.sakaliveguide.domain.value.SongName
+import com.m4sango.sakaliveguide.domain.value.UserId
+import org.springframework.dao.DuplicateKeyException
 import org.springframework.stereotype.Service
 
 @Service
@@ -19,10 +21,6 @@ class SongColorService(
         return songColorRepository.getSongColorList(songName)
     }
 
-    fun getLikes(songColorId: SongColorId): Likes {
-        return songColorLikesRepository.countLike(songColorId)
-    }
-
     fun register(
             songColor: SongColor
     ) {
@@ -32,7 +30,22 @@ class SongColorService(
         if (count.isExists()) {
             throw ApplicationException(errorCode = ErrorCode.EXISTS_SAME_DATA)
         }
-        
+
         songColorRepository.register(songColor)
+    }
+
+    fun getLikes(songColorId: SongColorId): Likes {
+        return songColorLikesRepository.countLike(songColorId)
+    }
+
+    fun register(
+            songColorId: SongColorId,
+            userId: UserId
+    ) {
+        try {
+            songColorLikesRepository.register(songColorId, userId)
+        } catch (ex: DuplicateKeyException) {
+            throw ApplicationException(ex, ErrorCode.ALREADY_LIKES)
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.m4sango.sakaliveguide.application.controller
 
+import com.m4sango.sakaliveguide.application.resource.request.SongColorsLikesRegisterRequest
 import com.m4sango.sakaliveguide.application.resource.request.SongColorsRegisterRequest
 import com.m4sango.sakaliveguide.application.resource.response.SongColorsGetLikesResponse
 import com.m4sango.sakaliveguide.application.resource.response.SongColorsGetListResponse
@@ -7,6 +8,7 @@ import com.m4sango.sakaliveguide.domain.SongColor
 import com.m4sango.sakaliveguide.domain.service.SongColorService
 import com.m4sango.sakaliveguide.domain.value.SongColorId
 import com.m4sango.sakaliveguide.domain.value.SongName
+import com.m4sango.sakaliveguide.domain.value.UserId
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -28,6 +30,16 @@ class SongColorController(private val songColorService: SongColorService) {
             @PathVariable("songColorId") songColorId: Int
     ): SongColorsGetLikesResponse {
         return SongColorsGetLikesResponse.create(songColorService.getLikes(SongColorId(songColorId)))
+    }
+
+    @PostMapping("/{songColorId}/likes")
+    fun register(
+            @PathVariable("songColorId") songColorId: Int,
+            @RequestBody request: SongColorsLikesRegisterRequest
+    ): ResponseEntity<Any> {
+        songColorService.register(SongColorId(songColorId), UserId(request.userId))
+
+        return ResponseEntity(HttpStatus.CREATED)
     }
 
     @PostMapping

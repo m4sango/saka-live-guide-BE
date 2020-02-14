@@ -25,4 +25,17 @@
     WHERE
       SONG_COLOR_ID = #{songColorId}
   </select>
+  
+  <insert id="insert">
+    INSERT INTO SONG_COLOR_LIKES
+    (
+      SONG_COLOR_ID,
+      USER_ID
+    )
+    VALUES
+    (
+      #{songColorId},
+      #{userId}
+    )
+  </insert>
 </mapper>
