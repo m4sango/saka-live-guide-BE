@@ -12,6 +12,8 @@ info:
 host: "petstore.swagger.io"
 basePath: "/v1"
 tags:
+  - name: "discs"
+    description: "CD"
   - name: "songs"
     description: "楽曲"
   - name: "songColors"
@@ -22,6 +24,21 @@ schemes:
   - "https"
   - "http"
 paths:
+  /discs:
+    get:
+      tags:
+        - "discs"
+      summary: "CDリスト取得"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: '#/parameters/group_req'
+      responses:
+        200:
+          description: "成功"
   /songs:
     get:
       tags:
@@ -34,6 +51,7 @@ paths:
         - "application/json"
       parameters:
         - $ref: '#/parameters/group_req'
+        - $ref: '#/parameters/disc_title'
       responses:
         200:
           description: "成功"
@@ -123,12 +141,6 @@ paths:
           description: "成功"
 
 parameters:
-  group_req:
-    name: "group"
-    in: query
-    description: "坂道グループ"
-    required: true
-    type: string
   song_name_path_req:
     name: "songName"
     in: path
@@ -141,6 +153,18 @@ parameters:
     description: "楽曲カラーID"
     required: true
     type: integer
+  group_req:
+    name: "group"
+    in: query
+    description: "坂道グループ"
+    required: true
+    type: string
+  disc_title:
+    name: "discTitle"
+    in: query
+    description: "CDタイトル"
+    required: false
+    type: string
 
 definitions:
   Order:

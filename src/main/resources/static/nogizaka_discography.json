@@ -149,6 +149,16 @@
       "order": "25th",
       "form": "シングル",
       "title": "しあわせの保護色"
+    },
+    {
+      "order": "none",
+      "form": "none",
+      "title": "ストリーミング"
+    },
+    {
+      "order": "none",
+      "form": "none",
+      "title": "未音源化"
     }
   ]
 }

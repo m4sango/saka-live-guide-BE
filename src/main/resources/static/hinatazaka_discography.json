@@ -1,0 +1,29 @@
+{
+  "discography": [
+    {
+      "order": "none",
+      "form": "none",
+      "title": "ひらがなけやき"
+    },
+    {
+      "order": "1st",
+      "form": "シングル",
+      "title": "キュン"
+    },
+    {
+      "order": "2nd",
+      "form": "シングル",
+      "title": "ドレミソラシド"
+    },
+    {
+      "order": "3rd",
+      "form": "シングル",
+      "title": "こんなに好きになっちゃっていいの?"
+    },
+    {
+      "order": "4th",
+      "form": "シングル",
+      "title": "ソンナコトナイヨ"
+    }
+  ]
+}

@@ -14,9 +14,9 @@ import java.util.stream.Collectors
 class DiscographyRepositoryImpl : DiscographyRepository {
 
     companion object {
-        const val FILE_PATH_PREFIX = "./src/main/resources/static/"
-        const val FILE_NAME_SUFFIX = "_discography.json"
-        val OBJECT_MAPPER = jacksonObjectMapper()
+        private const val FILE_PATH_PREFIX = "./src/main/resources/static/"
+        private const val FILE_NAME_SUFFIX = "_discography.json"
+        private val OBJECT_MAPPER = jacksonObjectMapper()
     }
 
     override fun getDiscographyList(groups: Groups): List<Discography> {

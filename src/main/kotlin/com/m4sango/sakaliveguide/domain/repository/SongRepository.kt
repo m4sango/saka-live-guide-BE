@@ -12,5 +12,5 @@ interface SongRepository {
 
     fun getAllSongList(groups: Groups): List<Song>
 
-    fun getSongListByDiscTitle(groups: Groups, discTitle: DiscTitle): List<Song>
+    fun getSongListByDiscTitle(groups: Groups, discTitle: DiscTitle): Map<DiscTitle, List<Song>>
 }

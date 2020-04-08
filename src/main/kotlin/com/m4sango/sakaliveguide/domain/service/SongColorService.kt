@@ -5,7 +5,8 @@ import com.m4sango.sakaliveguide.domain.exception.ApplicationException
 import com.m4sango.sakaliveguide.domain.exception.ErrorCode
 import com.m4sango.sakaliveguide.domain.repository.SongColorLikesRepository
 import com.m4sango.sakaliveguide.domain.repository.SongColorRepository
-import com.m4sango.sakaliveguide.domain.value.Likes
+import com.m4sango.sakaliveguide.domain.service.resources.result.LikesGetResult
+import com.m4sango.sakaliveguide.domain.service.resources.result.SongColorListGetResult
 import com.m4sango.sakaliveguide.domain.value.SongColorId
 import com.m4sango.sakaliveguide.domain.value.SongName
 import com.m4sango.sakaliveguide.domain.value.UserId
@@ -17,8 +18,8 @@ class SongColorService(
         private val songColorRepository: SongColorRepository,
         private val songColorLikesRepository: SongColorLikesRepository
 ) {
-    fun getSongColorList(songName: SongName): List<SongColor> {
-        return songColorRepository.getSongColorList(songName)
+    fun getSongColorList(songName: SongName): SongColorListGetResult {
+        return SongColorListGetResult.create(songColorRepository.getSongColorList(songName))
     }
 
     fun register(
@@ -34,8 +35,8 @@ class SongColorService(
         songColorRepository.register(songColor)
     }
 
-    fun getLikes(songColorId: SongColorId): Likes {
-        return songColorLikesRepository.countLike(songColorId)
+    fun getLikes(songColorId: SongColorId): LikesGetResult {
+        return LikesGetResult.create(songColorLikesRepository.countLike(songColorId))
     }
 
     fun register(
