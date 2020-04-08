@@ -1,0 +1,172 @@
+swagger: "2.0"
+info:
+  description: "坂道ライブガイドアプリのBE"
+  version: "1.0.0"
+  title: "saka-live-guide"
+  contact:
+    email: "m.s.1022.ttlove@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+# TODO: 直す
+host: "petstore.swagger.io"
+basePath: "/v1"
+tags:
+  - name: "songs"
+    description: "楽曲"
+  - name: "songColors"
+    description: "楽曲カラー"
+  - name: "songColorLikes"
+    description: "楽曲カラーいいね"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /songs:
+    get:
+      tags:
+        - "songs"
+      summary: "楽曲リスト取得"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: '#/parameters/group_req'
+      responses:
+        200:
+          description: "成功"
+  /songs/{songName}:
+    get:
+      tags:
+        - "songs"
+      summary: "楽曲取得"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: '#/parameters/song_name_path_req'
+        - $ref: '#/parameters/group_req'
+      responses:
+        200:
+          description: "成功"
+
+  /songs/{songName}/colors:
+    get:
+      tags:
+        - "songColors"
+      summary: "楽曲カラーリスト取得"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: '#/parameters/song_name_path_req'
+        - $ref: '#/parameters/group_req'
+      responses:
+        200:
+          description: "成功"
+  /songs/{songName}/colors/{songColorId}:
+    get:
+      tags:
+        - "songColors"
+      summary: "楽曲カラー取得"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: '#/parameters/song_name_path_req'
+        - $ref: '#/parameters/song_color_id_path_req'
+        - $ref: '#/parameters/group_req'
+      responses:
+        200:
+          description: "成功"
+
+  /songs/{songName}/colors/{songColorId}/likes:
+    get:
+      tags:
+        - "songColorLikes"
+      summary: "楽曲カラーいいね数取得"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: '#/parameters/song_name_path_req'
+        - $ref: '#/parameters/song_color_id_path_req'
+        - $ref: '#/parameters/group_req'
+      responses:
+        200:
+          description: "成功"
+    post:
+      tags:
+        - "songColorLikes"
+      summary: "楽曲カラーいいね登録"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: '#/parameters/song_name_path_req'
+        - $ref: '#/parameters/song_color_id_path_req'
+        - $ref: '#/parameters/group_req'
+      responses:
+        200:
+          description: "成功"
+
+parameters:
+  group_req:
+    name: "group"
+    in: query
+    description: "坂道グループ"
+    required: true
+    type: string
+  song_name_path_req:
+    name: "songName"
+    in: path
+    description: "楽曲名"
+    required: true
+    type: string
+  song_color_id_path_req:
+    name: "songColorId"
+    in: path
+    description: "楽曲カラーID"
+    required: true
+    type: integer
+
+definitions:
+  Order:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      petId:
+        type: "integer"
+        format: "int64"
+      quantity:
+        type: "integer"
+        format: "int32"
+      shipDate:
+        type: "string"
+        format: "date-time"
+      status:
+        type: "string"
+        description: "Order Status"
+        enum:
+          - "placed"
+          - "approved"
+          - "delivered"
+      complete:
+        type: "boolean"
+        default: false
+    xml:
+      name: "Order"
