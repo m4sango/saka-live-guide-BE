@@ -1,17 +1,17 @@
-package com.m4sango.sakaliveguide.application.resource.response
+package com.m4sango.sakaliveguide.application.resources.response
 
 import java.util.stream.Collectors
 import com.m4sango.sakaliveguide.domain.SongColor as SongColorDomain
 
-data class SongColorsGetListResponse(val songColorList: List<SongColor>) {
+data class SongColorListGetResponse(val songColorList: List<SongColor>) {
     companion object Factory {
-        fun create(domainList: List<SongColorDomain>): SongColorsGetListResponse {
+        fun create(domainList: List<SongColorDomain>): SongColorListGetResponse {
 
             val songColorList = domainList.stream()
                     .map { value -> SongColor.create(value) }
                     .collect(Collectors.toList())
 
-            return SongColorsGetListResponse(songColorList)
+            return SongColorListGetResponse(songColorList)
         }
     }
 }

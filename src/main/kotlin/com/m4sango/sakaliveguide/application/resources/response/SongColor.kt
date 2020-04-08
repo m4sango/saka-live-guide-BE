@@ -1,4 +1,4 @@
-package com.m4sango.sakaliveguide.application.resource.response
+package com.m4sango.sakaliveguide.application.resources.response
 
 import com.m4sango.sakaliveguide.domain.SongColor as SongColorDomain
 

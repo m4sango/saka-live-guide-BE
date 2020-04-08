@@ -1,4 +1,4 @@
-package com.m4sango.sakaliveguide.application.resource.request
+package com.m4sango.sakaliveguide.application.resources.request
 
 data class SongColorsLikesRegisterRequest(
         val userId: String)

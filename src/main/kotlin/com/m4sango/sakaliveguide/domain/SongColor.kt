@@ -1,6 +1,6 @@
 package com.m4sango.sakaliveguide.domain
 
-import com.m4sango.sakaliveguide.application.resource.request.SongColorsRegisterRequest
+import com.m4sango.sakaliveguide.application.resources.request.SongColorsRegisterRequest
 import com.m4sango.sakaliveguide.domain.value.PenColor
 import com.m4sango.sakaliveguide.domain.value.SongColorId
 import com.m4sango.sakaliveguide.domain.value.SongName
@@ -24,14 +24,13 @@ data class SongColor(
                     PenColor.of(entity.penColor2))
         }
 
-        fun createForRegister(request: SongColorsRegisterRequest): SongColor {
+        fun createForRegister(request: SongColorsRegisterRequest, songName: String): SongColor {
             return SongColor(
                     SongColorId(0),
                     UserId(request.userId),
-                    SongName(request.songName),
+                    SongName(songName),
                     PenColor.of(request.penColor1),
                     PenColor.of(request.penColor2))
         }
-
     }
 }
