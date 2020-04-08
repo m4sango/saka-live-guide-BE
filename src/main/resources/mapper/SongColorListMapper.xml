@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.m4sango.sakaliveguide.infrastructure.repository.mapper.SongColorListMapper">
+<mapper namespace="com.m4sango.sakaliveguidebe.infrastructure.repository.mapper.SongColorListMapper">
   <sql id="selectBase">
     SELECT
       SONG_COLOR_ID,
@@ -31,7 +31,7 @@
     PEN_COLOR_2 = #{penColor2}
   </sql>
   
-  <select id="findBySongName" resultType="com.m4sango.sakaliveguide.infrastructure.repository.entity.SongColorEntity">
+  <select id="findBySongName" resultType="com.m4sango.sakaliveguidebe.infrastructure.repository.entity.SongColorEntity">
     <include refid="selectBase"/>
     <include refid="from"/>
     WHERE
@@ -49,7 +49,7 @@
     <include refid="wherePenColor2"/>
   </select>
   
-  <insert id="insert" parameterType="com.m4sango.sakaliveguide.infrastructure.repository.entity.SongColorEntity">
+  <insert id="insert" parameterType="com.m4sango.sakaliveguidebe.infrastructure.repository.entity.SongColorEntity">
     INSERT INTO SONG_COLOR_LIST
     (
       USER_ID,
