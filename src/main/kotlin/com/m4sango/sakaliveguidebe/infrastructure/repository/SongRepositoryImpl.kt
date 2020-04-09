@@ -9,8 +9,8 @@ import com.m4sango.sakaliveguidebe.domain.value.DiscTitle
 import com.m4sango.sakaliveguidebe.domain.value.Groups
 import com.m4sango.sakaliveguidebe.domain.value.SongName
 import com.m4sango.sakaliveguidebe.infrastructure.repository.entity.SongListEntity
+import com.m4sango.sakaliveguidebe.infrastructure.repository.utils.FileUtils
 import org.springframework.stereotype.Component
-import java.io.File
 import java.util.stream.Collectors
 
 @Component
@@ -31,7 +31,7 @@ class SongRepositoryImpl : SongRepository {
     }
 
     override fun getSongListByDiscTitle(groups: Groups, discTitle: DiscTitle): Map<DiscTitle, List<Song>> {
-        val jsonStr: String = File(buildJsonFilePath(groups)).readText(Charsets.UTF_8)
+        val jsonStr: String = FileUtils.getResourceFileAsString(buildJsonFilePath(groups))
 
         val entity: SongListEntity = OBJECT_MAPPER.readValue(jsonStr)
 

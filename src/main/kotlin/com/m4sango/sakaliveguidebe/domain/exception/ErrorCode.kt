@@ -17,5 +17,11 @@ enum class ErrorCode(val value: String) {
      * データ状態不正
      */
     EXISTS_SAME_DATA("3100"),
+
+    /**
+     * 9000:
+     * システムエラー
+     */
+    SYSTEM_ERROR("9000"),
     ;
 }
